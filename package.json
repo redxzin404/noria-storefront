@@ -1,0 +1,51 @@
+{
+  "name": "site",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.14.0",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "db:generate": "prisma generate",
+    "db:generate:postgres": "prisma generate --schema prisma/postgres/schema.prisma",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:deploy:postgres": "prisma migrate deploy --schema prisma/postgres/schema.prisma",
+    "db:seed": "prisma db seed",
+    "db:seed:postgres": "tsx scripts/seed-postgres.ts",
+    "vercel-build": "npm run db:generate:postgres && npm run db:deploy:postgres && npm run build",
+    "admin:create": "tsx scripts/create-admin.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "argon2": "^0.45.1",
+    "lucide-react": "^1.57.0",
+    "next": "16.4.2",
+    "prisma": "^5.22.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^4.1.12",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^4.1.12"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}
